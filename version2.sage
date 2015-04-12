@@ -94,7 +94,7 @@ def indexCalculus(g,h,q,N,pid,dic):
         sum=(sum%(q-1)+((log_factor_base[i])*fp[i])%(q-1))%(q-1)
         i=i+1
     x=sum-s
-    print 'time for iteration',time.time()-t0
+    print 'time for iteration',time.time()-t0, N, pid
     dic[pid]=x%(q-1)
     #return x%(q-1)
     return
