@@ -125,7 +125,7 @@ def solveLSE(M,q):
         #print rref_M[r][c]
         #print "row,col",r,c
         val=rref_M[r][c]
-        print "val=",val
+        #print "val=",val
         #print "last line",rref_M[r]
         gcd1=gcd(val,q)
         if gcd1==1:
@@ -135,10 +135,10 @@ def solveLSE(M,q):
         elif gcd1.divides(temp):
             a=sage.rings.integer.Integer(val/gcd1)
             b=sage.rings.integer.Integer(q/gcd1)
-            print "a=",a
-            print "b=",b
+            #print "a=",a
+            #print "b=",b
             temp=sage.rings.integer.Integer(temp/gcd1)
-            print "temp=",temp
+            #print "temp=",temp
             k=pow(a,-1,b)
             k=sage.rings.integer.Integer(k)
             #print "k=",k
