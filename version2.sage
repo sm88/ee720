@@ -63,12 +63,12 @@ def indexCalculus(g,h,q,N,pid,dic):
     #print M,'\n'
     reduced_M=M.echelon_form()
     #print reduced_M
-    print "rank =", M.rank()
-    print "no of relation=",M.nrows()
+    #print "rank =", M.rank()
+    #print "no of relation=",M.nrows()
     
     log_factor_base=solveLSE(M,q-1)
     if len(log_factor_base) == 0:
-        print 'time for iteration',time.time()-t0
+        print 'time for iteration',time.time()-t0, N, pid
         dic[pid]=-1
         return
     #print "log_factor_base=",log_factor_base
