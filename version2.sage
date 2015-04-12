@@ -162,7 +162,7 @@ def runIC(g,h,q,Np):
 	jobs=[]
 	isDone=False
 	t0=time.time()
-	B=[50,100,150,200,250,300]
+	B=[100,150,200,250,300,350]
 	while not isDone:
 		dic=mgr.dict()
 		jobs=[]
