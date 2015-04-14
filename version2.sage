@@ -4,39 +4,44 @@ import multiprocessing
 
 def indexCalculus(g,h,q,N,pid,dic):
     t0=time.time()
+    
     #g generator
     #q modulus
     #h argument
-    #N largest prime factor in factor base (r) factors including -1
-    N=next_prime(N)
+    #N largest prime factor in factor base (r) factors  
+   
     factor_base=[]
-    i=1
-    while(i!=N):
+    
+    i=2
+
+    while(i<N):#N is the upper bound for the largest prime in factor base
         #print i
-        i=next_prime(i)
         factor_base.append(i)
+        i=next_prime(i)
     #print factor_base
     r=len(factor_base)
+    
+    N0=factor_base[-1] #N0 largest prime in factor base 
 
     countr=1;
     k=getQ(1,q-2)
-    #k=1
     checkInd=False
     list_relation=[]
     list_relation2=[]
+    
+    # find r relations
     while(1):
         if(countr==r):
             break
         relation=[0]*(r+1)
         relation[r]=k
-        #z=(g^k)%q
+        
         z=sage.rings.integer.Integer(pow(g,k,q))
         f=factor(z)
         list_f=list(f)
-        #print z
-        #print len(list_f)-1 
-        if len(list_f)==0 or list_f[len(list_f)-1][0]>N:
-            #k=k+1
+        
+        
+        if len(list_f)==0 or list_f[-1][0]>N0:
             k=getQ(1,q-2)
             continue
 
@@ -55,10 +60,10 @@ def indexCalculus(g,h,q,N,pid,dic):
             else:
                 list_relation.pop()
                 list_relation2.pop()
-        #print k
-        #k=k+1
+       
         checkInd=True
         k=getQ(1,q-2)
+    
     M=matrix(list_relation)
     #print M,'\n'
     reduced_M=M.echelon_form()
@@ -74,12 +79,11 @@ def indexCalculus(g,h,q,N,pid,dic):
     #print "log_factor_base=",log_factor_base
     s=0
     fp=[0]*r
-    while(1):
-        #y=((g^s)*h)%q 
+    while(1): 
         y=sage.rings.integer.Integer((pow(g,s,q)*(h%q))%q)
         f=factor(y)
         list_f=list(f)
-        if len(list_f)>0 and list_f[len(list_f)-1][0]<=N:
+        if len(list_f)>0 and list_f[-1][0]<=N0:
             for temp in list_f:
                 idx=factor_base.index(temp[0])
                 fp[idx]=temp[1]
@@ -135,8 +139,8 @@ def solveLSE(M,q):
         elif gcd1.divides(temp):
             a=sage.rings.integer.Integer(val/gcd1)
             b=sage.rings.integer.Integer(q/gcd1)
-            print "a=",a
-            print "b=",b
+            #print "a=",a
+            #print "b=",b
             temp=sage.rings.integer.Integer(temp/gcd1)
             print "temp=",temp
             k=pow(a,-1,b)
