@@ -68,12 +68,12 @@ def indexCalculus(g,h,q,N,pid,dic):
     #print M,'\n'
     reduced_M=M.echelon_form()
     #print reduced_M
-    print "rank =", M.rank()
-    print "no of relation=",M.nrows()
+    #print "rank =", M.rank()
+    #print "no of relation=",M.nrows()
     
     log_factor_base=solveLSE(M,q-1)
     if len(log_factor_base) == 0:
-        print 'time for iteration',time.time()-t0
+        print 'time for iteration',time.time()-t0, N, pid
         dic[pid]=-1
         return
     #print "log_factor_base=",log_factor_base
@@ -98,7 +98,7 @@ def indexCalculus(g,h,q,N,pid,dic):
         sum=(sum%(q-1)+((log_factor_base[i])*fp[i])%(q-1))%(q-1)
         i=i+1
     x=sum-s
-    print 'time for iteration',time.time()-t0
+    print 'time for iteration',time.time()-t0, N, pid
     dic[pid]=x%(q-1)
     #return x%(q-1)
     return
@@ -129,7 +129,7 @@ def solveLSE(M,q):
         #print rref_M[r][c]
         #print "row,col",r,c
         val=rref_M[r][c]
-        print "val=",val
+        #print "val=",val
         #print "last line",rref_M[r]
         gcd1=gcd(val,q)
         if gcd1==1:
@@ -142,7 +142,7 @@ def solveLSE(M,q):
             #print "a=",a
             #print "b=",b
             temp=sage.rings.integer.Integer(temp/gcd1)
-            print "temp=",temp
+            #print "temp=",temp
             k=pow(a,-1,b)
             k=sage.rings.integer.Integer(k)
             #print "k=",k
@@ -166,7 +166,7 @@ def runIC(g,h,q,Np):
 	jobs=[]
 	isDone=False
 	t0=time.time()
-	B=[50,100,150,200,250,300]
+	B=[100,150,200,250,300,350]
 	while not isDone:
 		dic=mgr.dict()
 		jobs=[]
