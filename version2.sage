@@ -189,6 +189,9 @@ def runIC(g,h,q,Np):
 			print 'inconsistent results, re-running'
 	print 'total time', time.time()-t0    
 
-def getQ(a,b):
+def getQ(a,b,prime=False):
     robj=random.SystemRandom(time.time())
-    return next_prime(robj.randint(a,b))
+    if prime:
+        return next_prime(robj.randint(a,b))
+    else:
+        return robj.randint(a,b)
