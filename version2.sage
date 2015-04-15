@@ -177,9 +177,8 @@ def runIC(g,h,q,B0,Np,delB=50):
     
     #Np no of process
     #B0 initial values of the upper bound 
-    #delb difference between two successive bounds
+    #delb difference between two successive bounds	
 	B=range(B0, B0+Np*delB+1,delB)
-
 	while not isDone:
 		dic=mgr.dict()
 		jobs=[]
@@ -238,20 +237,14 @@ def genInput(n):# function for generating input
 
 def sim(n1,n2,B0):
 	timeList=[]
-	x=getQ(10^4,10^6)
-	f=open('n_ver_t.data','w')
-	for i in range(n1,n2):
-		
-		inp=genInput(i)
-		q=inp[0]
-		g=inp[1]
-		h=sage.rings.integer.Integer(pow(g,x,q))
-		t=runIC(g,h,q,B0,1)
-		timeList.append(t)	
-		f.write(str(i)+'\t'+str(t)+'\n')
-
-	f.close()
+	with open('n_ver_t.data','a') as f:
+		for i in range(n1,n2+1):
+			x=getQ(10^4,10^6)		
+			inp=genInput(i)
+			q=inp[0]
+			g=inp[1]
+			h=sage.rings.integer.Integer(pow(g,x,q))
+			t=runIC(g,h,q,B0,5)
+			timeList.append(t)	
+			f.write(str(i)+'\t'+str(t)+'\t'+str(g)+'\t'+str(h)+'\t'+str(q)+'\t'+str(x)+'\n')
 	print timeList
-
-
-
