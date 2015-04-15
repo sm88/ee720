@@ -1,6 +1,8 @@
 import random
 import time
 import multiprocessing
+import os
+import signal
 
 def indexCalculus(g,h,q,N,pid,dic):
     t0=time.time()
@@ -74,7 +76,7 @@ def indexCalculus(g,h,q,N,pid,dic):
     log_factor_base=solveLSE(M,q-1)
     if len(log_factor_base) == 0:
         print 'time for iteration',time.time()-t0, N, pid
-        dic[pid]=-1
+        dic[pid]=(-2,time.time()-t0)
         return
     #print "log_factor_base=",log_factor_base
     s=0
@@ -99,7 +101,7 @@ def indexCalculus(g,h,q,N,pid,dic):
         i=i+1
     x=sum-s
     print 'time for iteration',time.time()-t0, N, pid
-    dic[pid]=x%(q-1)
+    dic[pid]=(x%(q-1),time.time()-t0)
     #return x%(q-1)
     return
 
@@ -174,6 +176,7 @@ def runIC(g,h,q,B0,Np,delB=50):
 	jobs=[]
 	isDone=False
 	t0=time.time()
+	procs={}
     
     #Np no of process
     #B0 initial values of the upper bound 
@@ -182,31 +185,54 @@ def runIC(g,h,q,B0,Np,delB=50):
 	while not isDone:
 		dic=mgr.dict()
 		jobs=[]
+		doCheck=True
 		for i in range(Np):
+			dic[i]=(-1,-1)
 			p=multiprocessing.Process(target=indexCalculus,args=(g,h,q,B[i],i,dic,))
+			procs[i]=p
 			jobs.append(p)
 			p.start()
 			
-		for p in jobs:
-			p.join()
-			
-		for i in dic.keys():
-			h1=sage.rings.integer.Integer(pow(g,dic[i],q))
-			if h1==h:
-				x=dic[i]
-				bound=B[i]
-				isDone=True
-				break
+		#poll for answer
+		while doCheck:
+			noGood=0
+			for i in dic.keys():
+				(ans,t) = dic[i]	#answer,time
+				#is some answer found
+				if ans != -1:
+					#check validity
+					h1=sage.rings.integer.Integer(pow(g,ans,q))
+					if h1==h:
+						x=i
+						bound=B[i]
+						isDone=True
+						doCheck=False
+						#kill other processes
+						#print "killing"
+						for pr in procs.keys():
+							if pr!=i:
+								while procs[i].is_alive():
+									os.kill(procs[i].pid,signal.SIGTERM)
+									time.sleep(0.1)
+						break
+					else:
+						#how many wrong in poll
+						noGood=noGood+1
+					#all wrong
+					if noGood == Np:
+						doCheck=True
+						break
 				
 		if not isDone:
 			print 'inconsistent results, re-running'
 	print '\n','--------- SOLVED ---------','\n'
-	print '         x :',x
-	print '         B :',bound
+	print 'ans :',dic[x][0]
+	print 'B :',bound
+	print 'best time:',dic[x][1]
 	tt=time.time()-t0
 	print 'Total Time :', tt
 
-	return tt
+	return dic[x][1]
 
 
 
@@ -247,4 +273,6 @@ def sim(n1,n2,B0):
 			t=runIC(g,h,q,B0,5)
 			timeList.append(t)	
 			f.write(str(i)+'\t'+str(t)+'\t'+str(g)+'\t'+str(h)+'\t'+str(q)+'\t'+str(x)+'\n')
+			f.flush()
+			os.fsync(f)
 	print timeList
