@@ -14,7 +14,7 @@ def indexCalculus(g,h,q,N,pid,dic):
     
     i=2
 
-    while(i<N):#N is the upper bound for the largest prime in factor base
+    while(i<N):#N is the upper bound for the largest prime in factor baseT 
         #print i
         factor_base.append(i)
         i=next_prime(i)
@@ -66,7 +66,7 @@ def indexCalculus(g,h,q,N,pid,dic):
     
     M=matrix(list_relation)
     #print M,'\n'
-    reduced_M=M.echelon_form()
+ 	#reduced_M=M.echelon_form()
     #print reduced_M
     #print "rank =", M.rank()
     #print "no of relation=",M.nrows()
@@ -178,7 +178,7 @@ def runIC(g,h,q,B0,Np,delB=50):
     #Np no of process
     #B0 initial values of the upper bound 
     #delb difference between two successive bounds
-	B=range(B0, Np*delB+1,delB)
+	B=range(B0, B0+Np*delB+1,delB)
 
 	while not isDone:
 		dic=mgr.dict()
@@ -216,7 +216,7 @@ def getQ(a,b,prime=False): # function for geting random number in the range [a,b
 def genInput(n):# function for generating input
 
 	# INPUT  : n               -> no. of digit
-	# OUTPUT : list input[q,g] -> containing the prime q, and the multiplicate generator of the group g 
+	# OUTPUT : list input[q,g] -> containing the prime q, and the multiplicative generator of the group g 
 	
 	input=[]
 	rnd=random.SystemRandom(time.time())
