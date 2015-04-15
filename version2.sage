@@ -204,7 +204,12 @@ def runIC(g,h,q,B0,Np,delB=50):
 	print '\n','--------- SOLVED ---------','\n'
 	print '         x :',x
 	print '         B :',bound
-	print 'Total Time :', time.time()-t0    
+	tt=time.time()-t0
+	print 'Total Time :', tt
+
+	return tt
+
+
 
 def getQ(a,b,prime=False): # function for geting random number in the range [a,b]
     robj=random.SystemRandom(time.time())
@@ -230,3 +235,23 @@ def genInput(n):# function for generating input
 	input.append(g)
 
 	return input
+
+def sim(n1,n2,B0):
+	timeList=[]
+	x=getQ(10^4,10^6)
+	f=open('n_ver_t.data','w')
+	for i in range(n1,n2):
+		
+		inp=genInput(i)
+		q=inp[0]
+		g=inp[1]
+		h=sage.rings.integer.Integer(pow(g,x,q))
+		t=runIC(g,h,q,B0,1)
+		timeList.append(t)	
+		f.write(str(i)+'\t'+str(t)+'\n')
+
+	f.close()
+	print timeList
+
+
+
