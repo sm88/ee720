@@ -1,0 +1,251 @@
+sage: load("version2.sage")                 
+sage: sim(5,15,200)        
+
+          INPUT  
+
+      prime : 64513
+  generator : 5
+h=g^x mod q : 50795 
+
+-------- SOLVING -------- 
+
+time for iteration 1.24574804306 250 1
+
+--------- SOLVED --------- 
+
+ans : 61553
+B : 250
+best time: 1.24580097198
+Total Time : 1.35671710968
+
+          INPUT  
+
+      prime : 886199
+  generator : 17
+h=g^x mod q : 273152 
+
+-------- SOLVING -------- 
+
+time for iteration 1.8605120182 200 0
+time for iteration 1.86915302277 300 2
+time for iteration 1.17368912697 250 1
+time for iteration 1.7772629261 300 2
+
+--------- SOLVED --------- 
+
+ans : 134789
+B : 300
+best time: 1.77731204033
+Total Time : 1.89704799652
+
+          INPUT  
+
+      prime : 5881567
+  generator : 3
+h=g^x mod q : 4828734 
+
+-------- SOLVING -------- 
+
+time for iteration 2.06850886345 200 0
+time for iteration 2.1396291256 350 3
+time for iteration 3.92110514641 350 3
+time for iteration 0.95712184906 250 1
+time for iteration 1.03282880783 200 0
+
+--------- SOLVED --------- 
+
+ans : 939815
+B : 250
+best time: 0.957273006439
+Total Time : 1.07573008537
+
+          INPUT  
+
+      prime : 38824111
+  generator : 6
+h=g^x mod q : 23673503 
+
+-------- SOLVING -------- 
+
+time for iteration 4.74326610565 400 4
+time for iteration 1.55261993408 250 1
+time for iteration 2.63562011719 300 2
+time for iteration 1.51512002945 300 2
+time for iteration 1.68527984619 200 0
+time for iteration 2.15435409546 350 3
+time for iteration 3.96550393105 400 4
+time for iteration 4.42496800423 350 3
+time for iteration 4.36767292023 400 4
+
+--------- SOLVED --------- 
+
+ans : 284693
+B : 400
+best time: 4.36770987511
+Total Time : 4.55833792686
+
+          INPUT  
+
+      prime : 287277439
+  generator : 3
+h=g^x mod q : 213325554 
+
+-------- SOLVING -------- 
+
+time for iteration 8.3301680088 400 4
+time for iteration 0.960910797119 200 0
+time for iteration 0.973826885223 300 2
+time for iteration 1.06508779526 250 1
+
+--------- SOLVED --------- 
+
+ans : 211000
+B : 250
+best time: 1.0651140213
+Total Time : 1.17512607574
+
+          INPUT  
+
+      prime : 2831796377
+  generator : 3
+h=g^x mod q : 479472926 
+
+-------- SOLVING -------- 
+
+time for iteration 1.47189688683 250 1
+time for iteration 1.48237681389 200 0
+
+--------- SOLVED --------- 
+
+ans : 839172
+B : 200
+best time: 1.48241496086
+Total Time : 1.59672093391
+
+          INPUT  
+
+      prime : 52087302559
+  generator : 3
+h=g^x mod q : 5889414426 
+
+-------- SOLVING -------- 
+
+time for iteration 1.95901298523 350 3
+time for iteration 2.43871212006 300 2
+time for iteration 3.14510607719 250 1
+time for iteration 6.93516492844 400 4
+time for iteration 4.59205102921 300 2
+time for iteration 4.85850715637 200 0
+time for iteration 5.05553507805 400 4
+time for iteration 5.81379508972 350 3
+
+--------- SOLVED --------- 
+
+ans : 469968
+B : 350
+best time: 5.81382513046
+Total Time : 5.96430206299
+
+          INPUT  
+
+      prime : 891844309283
+  generator : 2
+h=g^x mod q : 633407334139 
+
+-------- SOLVING -------- 
+
+time for iteration 15.3799078465 350 3
+time for iteration 14.4069390297 400 4
+time for iteration 8.12254095078 350 3
+
+--------- SOLVED --------- 
+
+ans : 884442
+B : 350
+best time: 8.12257385254
+Total Time : 8.25471401215
+
+          INPUT  
+
+      prime : 7845849960719
+  generator : 7
+h=g^x mod q : 4977517149650 
+
+-------- SOLVING -------- 
+
+time for iteration 10.5959670544 300 2
+time for iteration 13.4260389805 400 4
+time for iteration 13.8381280899 250 1
+time for iteration 13.8655431271 200 0
+time for iteration 14.2615430355 350 3
+time for iteration 16.774848938 400 4
+time for iteration 19.6326839924 300 2
+
+--------- SOLVED --------- 
+
+ans : 650153
+B : 300
+best time: 19.6327109337
+Total Time : 19.7505130768
+
+          INPUT  
+
+      prime : 89800659531367
+  generator : 3
+h=g^x mod q : 73318498551605 
+
+-------- SOLVING -------- 
+
+time for iteration 24.0256679058 250 1
+time for iteration 41.5017812252 200 0
+time for iteration 45.0238862038 350 3
+time for iteration 51.7417829037 300 2
+
+--------- SOLVED --------- 
+
+ans : 985726
+B : 300
+best time: 51.7418129444
+Total Time : 51.8591790199
+
+sage: load("version2.sage")
+sage: sim(15,15,200)       
+
+INPUT  
+
+prime : 831457962235237
+generator : 6
+h=g^x mod q : 550108624934350 
+
+-------- SOLVING -------- 
+
+time for iteration 137.93839407 350 3
+time for iteration 158.061689138 300 2
+
+--------- SOLVED --------- 
+
+ans : 996159
+B : 300
+best time: 158.061730146
+Total Time : 158.180551052
+[158.06173014640808]
+
+sage: sim(17,17,200)
+
+INPUT  
+
+prime : 19392986584839121
+generator : 17
+h=g^x mod q : 19365839568937789 
+
+-------- SOLVING -------- 
+
+time for iteration 1178.88255405 400 4
+
+--------- SOLVED --------- 
+
+ans : 635987
+B : 400
+best time: 1178.88258004
+Total Time : 1179.00471807
+[1178.8825800418854]
