@@ -149,6 +149,7 @@ def solveLSE(M,q):
             solution[c]=(temp*k)%q
             #print solution[c]
         else:
+        	#NO SOLUTION
             #print "val=",val
             #print "gcd1=",gcd1
             #print "temp=",temp
@@ -160,13 +161,25 @@ def solveLSE(M,q):
 
     return solution
 
-def runIC(g,h,q,Np):
+def runIC(g,h,q,B0,Np,delB=50):
+	print 
+	print '          INPUT ', '\n'
+
+	print '      prime :', q 
+	print '  generator :', g
+	print 'h=g^x mod q :', h, '\n'
+	print '-------- SOLVING --------','\n'
 	mgr=multiprocessing.Manager()
 	dic=mgr.dict()
 	jobs=[]
 	isDone=False
 	t0=time.time()
-	B=[100,150,200,250,300,350]
+    
+    #Np no of process
+    #B0 initial values of the upper bound 
+    #delb difference between two successive bounds
+	B=range(B0, Np*delB+1,delB)
+
 	while not isDone:
 		dic=mgr.dict()
 		jobs=[]
@@ -181,17 +194,39 @@ def runIC(g,h,q,Np):
 		for i in dic.keys():
 			h1=sage.rings.integer.Integer(pow(g,dic[i],q))
 			if h1==h:
-				print dic[i],B[i]
+				x=dic[i]
+				bound=B[i]
 				isDone=True
 				break
 				
 		if not isDone:
 			print 'inconsistent results, re-running'
-	print 'total time', time.time()-t0    
+	print '\n','--------- SOLVED ---------','\n'
+	print '         x :',x
+	print '         B :',bound
+	print 'Total Time :', time.time()-t0    
 
-def getQ(a,b,prime=False):
+def getQ(a,b,prime=False): # function for geting random number in the range [a,b]
     robj=random.SystemRandom(time.time())
     if prime:
         return next_prime(robj.randint(a,b))
     else:
         return robj.randint(a,b)
+
+def genInput(n):# function for generating input
+
+	# INPUT  : n               -> no. of digit
+	# OUTPUT : list input[q,g] -> containing the prime q, and the multiplicate generator of the group g 
+	
+	input=[]
+	rnd=random.SystemRandom(time.time())
+	while True:
+		q=next_prime(rnd.randint(1*(10**(n-1)),9*(10**(n-1))))
+		if(q<(10^n)-1):
+			break
+	input.append(q)
+	rings=Integers(q)
+	g=rings.multiplicative_generator()
+	input.append(g)
+
+	return input
